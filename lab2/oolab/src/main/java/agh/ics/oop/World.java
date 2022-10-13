@@ -43,6 +43,7 @@ public class World {
         run(enumArray);
         System.out.println("System zakończył działanie");
 
+
     }
 
 

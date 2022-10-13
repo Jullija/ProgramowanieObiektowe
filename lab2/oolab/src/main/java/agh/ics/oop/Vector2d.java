@@ -100,9 +100,11 @@ public class Vector2d {
 
 
     boolean precedes(Vector2d other){
+
         return x <= other.x && y <= other.y;
     }
     boolean follows(Vector2d other){
+
         return x >= other.x && y >= other.y;
     }
 
