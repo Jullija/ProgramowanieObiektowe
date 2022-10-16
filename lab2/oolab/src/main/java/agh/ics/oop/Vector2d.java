@@ -71,7 +71,7 @@ public class Vector2d {
 
 
 
-
+    @Override
     public boolean equals(Object other){ //dostaję Object other i zwraca mi bool
         if (this == other){  //jeśli mój wektor i other mają ten sam adres
             return true;
