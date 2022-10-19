@@ -38,7 +38,7 @@ public class Vector2d {
             b = other.y;
         }
 
-        return new Vector2d(a, b);
+        return new Vector2d(a, b); //return new Vector2d(Math.max(x, other.x), Math.max(y, other.y))
 
     }
 
@@ -61,14 +61,14 @@ public class Vector2d {
             b = other.y;
         }
 
-        return new Vector2d(a, b);
+        return new Vector2d(a, b); //return new Vector2d(Math.min(x, other.x), Math.min(y, other.y))
     }
 
 
 
     public Vector2d opposite(){
 
-        return new Vector2d(-this.x, -this.y);
+        return new Vector2d(-x, -y);
     }
 
 
@@ -84,7 +84,7 @@ public class Vector2d {
 
         Vector2d newVector = (Vector2d) other; //zamieniam object other na wektor typu vector2d
 
-        if (newVector.x == this.x && newVector.y == this.y){
+        if (newVector.x == x && newVector.y == y){
             return true;
         }else{
             return false;
