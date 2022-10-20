@@ -43,6 +43,17 @@ public class World {
         run(enumArray);
         System.out.println("System zakończył działanie");
 
+        Animal zwierzatko = new Animal();
+        System.out.println(zwierzatko.getAnimalVector());
+
+        zwierzatko.move(MoveDirection.RIGHT);
+        zwierzatko.move(MoveDirection.FORWARD);
+        zwierzatko.move(MoveDirection.FORWARD);
+        zwierzatko.move(MoveDirection.FORWARD);
+        System.out.println(zwierzatko.getAnimalVector());
+        System.out.println(zwierzatko.getAnimalDirection());
+
+
 
     }
 
