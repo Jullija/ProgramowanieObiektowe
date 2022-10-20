@@ -84,11 +84,7 @@ public class Vector2d {
 
         Vector2d newVector = (Vector2d) other; //zamieniam object other na wektor typu vector2d
 
-        if (newVector.x == x && newVector.y == y){
-            return true;
-        }else{
-            return false;
-        }
+        return (newVector.x == x && newVector.y == y);
 
 
     }

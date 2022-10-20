@@ -43,10 +43,21 @@ public class Animal {
                 orientation = orientation.previous();
                 break;
             case FORWARD:
-                position = position.add(orientation.toUnitVector());
+                Vector2d newPosition = position.add(orientation.toUnitVector());
+
+                if (newPosition.follows(new Vector2d(0, 0)) && newPosition.precedes(new Vector2d(4, 4))){
+                    position = newPosition;
+                }
+
                 break;
+
             case BACKWARD:
-                position = position.subtract(orientation.toUnitVector());
+                newPosition = position.subtract(orientation.toUnitVector());
+
+                if (newPosition.follows(new Vector2d(0, 0)) && newPosition.precedes(new Vector2d(4, 4))){
+                position = newPosition;
+                }
+
                 break;
 
 
