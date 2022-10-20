@@ -68,7 +68,7 @@ public class Vector2dTest {
         Vector2d thirdVector = new Vector2d(1, 2);
         Vector2d ans = new Vector2d(3, 2);
 
-        assertEquals(ans, firstVector.upperRight(secondVector));
+        assertEquals(ans, firstVector.upperRight(secondVector)); //najpierw odpowiedź, potem co sprawdzamy
         assertEquals(firstVector, firstVector.upperRight(thirdVector));
 
     }
