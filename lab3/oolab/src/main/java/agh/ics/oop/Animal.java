@@ -39,9 +39,11 @@ public class Animal {
             case RIGHT:
                 orientation = orientation.next();
                 break;
+
             case LEFT:
                 orientation = orientation.previous();
                 break;
+
             case FORWARD:
                 Vector2d newPosition = position.add(orientation.toUnitVector());
 
