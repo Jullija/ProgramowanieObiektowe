@@ -12,18 +12,23 @@ public class Animal {
         this.position = new Vector2d(2,2);
     }
 
+    public Animal(MapDirection orientation, Vector2d position){
+        this.orientation = orientation;
+        this.position = position;
+    }
+
 
     @Override
     public String toString() {
         return "%s %s".formatted(orientation, position);
     }
 
-    public Vector2d getAnimalVector() {
-        return position;
+    public MapDirection getAnimalOrientation() {
+        return orientation;
     }
 
-    public MapDirection getAnimalDirection() {
-        return orientation;
+    public Vector2d getAnimalPosition() {
+        return position;
     }
 
 
