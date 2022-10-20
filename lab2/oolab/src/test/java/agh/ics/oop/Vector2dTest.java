@@ -23,10 +23,15 @@ public class Vector2dTest {
 
     @Test
     public void toStringTest(){
+
+        //given
         Vector2d firstVector = new Vector2d(1, 2);
+
+        //when
         String a = "(1, 2)";
         String b = "(3, 4)";
 
+        //then
         assertTrue(firstVector.toString().equals(a));
         assertFalse(firstVector.toString().equals(b));
 
@@ -63,8 +68,8 @@ public class Vector2dTest {
         Vector2d thirdVector = new Vector2d(1, 2);
         Vector2d ans = new Vector2d(3, 2);
 
-        assertEquals(firstVector.upperRight(secondVector), ans);
-        assertEquals(firstVector.upperRight(thirdVector), firstVector);
+        assertEquals(ans, firstVector.upperRight(secondVector));
+        assertEquals(firstVector, firstVector.upperRight(thirdVector));
 
     }
 
@@ -75,8 +80,8 @@ public class Vector2dTest {
         Vector2d thirdVector = new Vector2d(1, 2);
         Vector2d ans = new Vector2d(1, 0);
 
-        assertEquals(firstVector.lowerLeft(secondVector), ans);
-        assertEquals(firstVector.lowerLeft(thirdVector), firstVector);
+        assertEquals(ans, firstVector.lowerLeft(secondVector));
+        assertEquals(firstVector, firstVector.lowerLeft(thirdVector));
 
     }
 
@@ -90,8 +95,8 @@ public class Vector2dTest {
         Vector2d ans1 = new Vector2d(4, 6);
         Vector2d ans2 = new Vector2d(0, 0);
 
-        assertEquals(firstVector.add(secondVector), ans1);
-        assertEquals(firstVector.add(thirdVector), ans2);
+        assertEquals(ans1, firstVector.add(secondVector));
+        assertEquals(ans2, firstVector.add(thirdVector));
     }
 
 
@@ -104,9 +109,9 @@ public class Vector2dTest {
         Vector2d ans2 = new Vector2d(-2, -4);
         Vector2d ans3 = new Vector2d(2, 4);
 
-        assertEquals(firstVector.subtract(secondVector), ans1);
-        assertEquals(firstVector.subtract(thirdVector), ans3);
-        assertEquals(thirdVector.subtract(firstVector), ans2);
+        assertEquals(ans1, firstVector.subtract(secondVector));
+        assertEquals(ans3, firstVector.subtract(thirdVector));
+        assertEquals(ans2, thirdVector.subtract(firstVector));
 
     }
 
@@ -118,9 +123,9 @@ public class Vector2dTest {
         Vector2d thirdVector = new Vector2d(-1, -2);
         Vector2d ans1 = new Vector2d(-3, -4);
 
-        assertEquals(firstVector.opposite(), thirdVector);
-        assertEquals(secondVector.opposite(), ans1);
-        assertEquals(thirdVector.opposite(), firstVector);
+        assertEquals(thirdVector, firstVector.opposite());
+        assertEquals(ans1, secondVector.opposite());
+        assertEquals(firstVector, thirdVector.opposite());
     }
 
 

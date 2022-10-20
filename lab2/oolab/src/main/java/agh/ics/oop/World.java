@@ -1,16 +1,16 @@
 package agh.ics.oop;
 
 public class World {
-    private static Direction[] change(String[] directions){ //dostaję tablicę ze stringami i zamieniam na tablicę z enum
-        Direction tab[] = new Direction[directions.length]; //tworzę tablicę o długości tablicy ze stringami, w której będę przechowywać wartość enum
+    private static MoveDirection[] change(String[] directions){ //dostaję tablicę ze stringami i zamieniam na tablicę z enum
+        MoveDirection tab[] = new MoveDirection[directions.length]; //tworzę tablicę o długości tablicy ze stringami, w której będę przechowywać wartość enum
 
         for(int i = 0; i < directions.length; i++){
-            Direction move = switch(directions[i]){
-                case "f" -> Direction.FORWARD;
-                case "b" -> Direction.BACKWARD;
-                case "l" -> Direction.LEFT;
-                case "r" -> Direction.RIGHT;
-                default -> Direction.OTHER;
+            MoveDirection move = switch(directions[i]){
+                case "f" -> MoveDirection.FORWARD;
+                case "b" -> MoveDirection.BACKWARD;
+                case "l" -> MoveDirection.LEFT;
+                case "r" -> MoveDirection.RIGHT;
+                default -> MoveDirection.OTHER;
             };
 
             tab[i] = move;
@@ -21,9 +21,9 @@ public class World {
     }
 
 
-    private static void run(Direction[] directions) {
+    private static void run(MoveDirection[] directions) {
 
-        for(Direction direction : directions){
+        for(MoveDirection direction : directions){
             String text = switch(direction){
                 case FORWARD -> "Zwierzak idzie do przodu";
                 case BACKWARD -> "Zwierzak idzie w tył";
@@ -39,7 +39,7 @@ public class World {
 
     public static void main (String[] args){ //wystarczy wpisać main
         System.out.println("System startuje"); //wystarczy wpisać sout
-        Direction[] enumArray = change(args);
+        MoveDirection[] enumArray = change(args);
         run(enumArray);
         System.out.println("System zakończył działanie");
 
