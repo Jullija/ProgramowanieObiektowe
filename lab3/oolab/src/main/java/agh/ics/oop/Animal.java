@@ -67,6 +67,9 @@ public class Animal {
 
                 break;
 
+            default:
+                ;
+
 
         }
 

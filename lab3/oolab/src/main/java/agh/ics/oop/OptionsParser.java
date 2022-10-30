@@ -9,36 +9,40 @@ public class OptionsParser {
         int i = 0; //aby wiedzieć, jaka jest faktyczna długość tablicy, którą mam zwrócić -> tylko kierunki wpisuję, gdy dane są złe, jest pusta tablica
 
         for (String direction : directions){
-            if (direction.equals("f") || direction.equals("forward") || direction.equals("b") || direction.equals("backward") ||
-            direction.equals("l") || direction.equals("left") || direction.equals("r") || direction.equals("right")){
 
                 switch(direction){
                     case "f":
                     case "forward":
                         ans[i] = MoveDirection.FORWARD;
+                        i++;
                         break;
 
 
                     case "b":
                     case "backward":
                         ans[i] = MoveDirection.BACKWARD;
+                        i++;
                         break;
 
                     case "l":
                     case "left":
                         ans[i] = MoveDirection.LEFT;
+                        i++;
                         break;
 
                     case "r":
                     case "right":
                         ans[i] = MoveDirection.RIGHT;
+                        i++;
                         break;
 
+                    default:
+                        ;
                 }
-                i++;
+
 
             }
-        }
+
         ans = Arrays.copyOfRange(ans, 0, i); //ans to tylko tablica od 0 do momentu, gdzie są kierunki
         return ans;
     }
