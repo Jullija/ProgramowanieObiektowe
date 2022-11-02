@@ -32,7 +32,7 @@ public class Animal {
     }
 
 
-    boolean isAt(Vector2d position){
+    public boolean isAt(Vector2d position){
         return this.position.equals(position);
     }
 
@@ -41,34 +41,24 @@ public class Animal {
     public void move(MoveDirection direction){
 
         switch (direction){
-            case RIGHT:
-                orientation = orientation.next();
-                break;
+            case RIGHT -> this.orientation = this.orientation.next();
 
-            case LEFT:
-                orientation = orientation.previous();
-                break;
+            case LEFT -> this.orientation = this.orientation.previous();
 
-            case FORWARD:
-                Vector2d newPosition = position.add(orientation.toUnitVector());
+            default -> {
+                Vector2d orientationVector = this.orientation.toUnitVector(); //robię wektor kierunku
 
-                if (newPosition.follows(new Vector2d(0, 0)) && newPosition.precedes(new Vector2d(4, 4))){
-                    position = newPosition;
+                if (direction == MoveDirection.BACKWARD){ //jeśli ma iść do tyłu, to zamiast wektora (1, 0) będzie wektor (-1, 0)
+                    orientationVector = orientationVector.opposite();
                 }
 
-                break;
-
-            case BACKWARD:
-                newPosition = position.subtract(orientation.toUnitVector());
-
+                Vector2d newPosition = this.position.add(orientationVector);
                 if (newPosition.follows(new Vector2d(0, 0)) && newPosition.precedes(new Vector2d(4, 4))){
-                position = newPosition;
+                    this.position = newPosition;
                 }
 
-                break;
+            }
 
-            default:
-                ;
 
 
         }
