@@ -4,25 +4,32 @@ import java.util.Objects;
 
 public class Animal {
 
+
     private MapDirection orientation;
     private Vector2d position;
+    private IWorldMap map;
 
 
+    public Animal (IWorldMap map){
+        this.map = map;
+        this.position = new Vector2d(2, 2);
+    }
 
-    public Animal() {
+    public Animal (IWorldMap map, Vector2d initialPosition){
+        this.map = map;
+        this.position = initialPosition;
         this.orientation = MapDirection.NORTH;
-        this.position = new Vector2d(2,2);
     }
-
-    public Animal(MapDirection orientation, Vector2d position){
-        this.orientation = orientation;
-        this.position = position;
-    }
-
 
     @Override
     public String toString() {
-        return "%s %s".formatted(orientation, position);
+        String orientationsOneCharacter = switch (this.orientation){
+            case NORTH -> "N";
+            case SOUTH -> "S";
+            case EAST -> "E";
+            case WEST -> "W";
+        };
+        return orientationsOneCharacter;
     }
 
     public MapDirection getAnimalOrientation() {
@@ -54,8 +61,10 @@ public class Animal {
             case BACKWARD -> position = position.subtract(orientationVector);
             }
 
+            if (map.canMoveTo(position)){
+                this.position = position.lowerLeft(World.UPPER_BOUND).upperRight(World.LOWER_BOUND);
+            }
 
-            this.position = position.lowerLeft(World.UPPER_BOUND).upperRight(World.LOWER_BOUND);
 
 
         }

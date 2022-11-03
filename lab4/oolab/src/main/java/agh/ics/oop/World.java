@@ -39,16 +39,11 @@ public class World {
     }
 
     public static void main (String[] args){
-        Animal zwierzatko = new Animal();
-
-        OptionsParser tmp = new OptionsParser();
-        MoveDirection[] animalDirections = tmp.parse(args); //zamienia mi podane dane na tablicę directions
-
-        for (MoveDirection direction : animalDirections){
-            zwierzatko.move(direction);
-        }
-
-        System.out.println(zwierzatko);
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
 
 
 
