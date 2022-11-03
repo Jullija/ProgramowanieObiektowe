@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import java.util.Objects;
+import java.util.Vector;
 
 public class Animal {
 
@@ -13,6 +14,7 @@ public class Animal {
     public Animal (IWorldMap map){
         this.map = map;
         this.position = new Vector2d(2, 2);
+        this.orientation = MapDirection.NORTH;
     }
 
     public Animal (IWorldMap map, Vector2d initialPosition){
@@ -50,19 +52,20 @@ public class Animal {
     public void move(MoveDirection direction){
 
         Vector2d orientationVector = this.orientation.toUnitVector();
+        Vector2d newPosition = position;
 
         switch (direction){
             case RIGHT -> this.orientation = this.orientation.next();
 
             case LEFT -> this.orientation = this.orientation.previous();
 
-            case FORWARD -> position = position.add(orientationVector);
+            case FORWARD -> newPosition = position.add(orientationVector);
 
-            case BACKWARD -> position = position.subtract(orientationVector);
+            case BACKWARD -> newPosition = position.subtract(orientationVector);
             }
 
-            if (map.canMoveTo(position)){
-                this.position = position.lowerLeft(World.UPPER_BOUND).upperRight(World.LOWER_BOUND);
+            if (map.canMoveTo(newPosition)){
+                this.position = newPosition;
             }
 
 
