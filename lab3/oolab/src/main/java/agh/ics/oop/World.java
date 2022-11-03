@@ -1,6 +1,9 @@
 package agh.ics.oop;
 
 public class World {
+
+    public static final Vector2d LOWER_BOUND = new Vector2d(0,0);
+    public static final Vector2d UPPER_BOUND = new Vector2d(4,4);
     private static MoveDirection[] change(String[] directions){ //dostaję tablicę ze stringami i zamieniam na tablicę z enum
         MoveDirection tab[] = new MoveDirection[directions.length]; //tworzę tablicę o długości tablicy ze stringami, w której będę przechowywać wartość enum
 

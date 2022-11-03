@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import java.util.Objects;
+
 public class Animal {
 
     private MapDirection orientation;
@@ -33,35 +35,30 @@ public class Animal {
 
 
     public boolean isAt(Vector2d position){
-        return this.position.equals(position);
+        return Objects.equals(this.position, position); //zabezpieczamy się, aby żadna pozycja nie była nullem
     }
 
 
 
     public void move(MoveDirection direction){
 
+        Vector2d orientationVector = this.orientation.toUnitVector();
+
         switch (direction){
             case RIGHT -> this.orientation = this.orientation.next();
 
             case LEFT -> this.orientation = this.orientation.previous();
 
-            default -> {
-                Vector2d orientationVector = this.orientation.toUnitVector(); //robię wektor kierunku
+            case FORWARD -> position = position.add(orientationVector);
 
-                if (direction == MoveDirection.BACKWARD){ //jeśli ma iść do tyłu, to zamiast wektora (1, 0) będzie wektor (-1, 0)
-                    orientationVector = orientationVector.opposite();
-                }
-
-                Vector2d newPosition = this.position.add(orientationVector);
-                if (newPosition.follows(new Vector2d(0, 0)) && newPosition.precedes(new Vector2d(4, 4))){
-                    this.position = newPosition;
-                }
-
+            case BACKWARD -> position = position.subtract(orientationVector);
             }
 
+
+            this.position = position.lowerLeft(World.UPPER_BOUND).upperRight(World.LOWER_BOUND);
 
 
         }
 
-    }
+
 }
