@@ -16,6 +16,7 @@ public class SimulationEngine implements IEngine {
         this.animalList = new ArrayList<Animal>();
         this.animalPositions = animalPositions;
 
+        //można też zrobić to poniżej jako prywatną metodę i wywołać w konstruktorze, żeby było ładniej
         for (Vector2d position : animalPositions){
             Animal animal = new Animal(map, position); //tworzę zwierzaczka z tą pozycją
 

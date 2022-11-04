@@ -12,9 +12,7 @@ public class Animal {
 
 
     public Animal (IWorldMap map){
-        this.map = map;
-        this.position = new Vector2d(2, 2);
-        this.orientation = MapDirection.NORTH;
+        this(map, new Vector2d(2, 2)); //w konstruktorze wywołujemy konstruktor
     }
 
     public Animal (IWorldMap map, Vector2d initialPosition){
