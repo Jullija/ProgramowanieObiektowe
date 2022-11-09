@@ -33,25 +33,19 @@ public class World {
             };
             System.out.println(text);
         }
-
-
     }
 
-    public static void main (String[] args){ //wystarczy wpisać main
-        System.out.println("System startuje"); //wystarczy wpisać sout
-        MoveDirection[] enumArray = change(args);
-        run(enumArray);
-        System.out.println("System zakończył działanie");
-
+    public static void main (String[] args){
         Animal zwierzatko = new Animal();
-        System.out.println(zwierzatko.getAnimalVector());
 
-        zwierzatko.move(MoveDirection.RIGHT);
-        zwierzatko.move(MoveDirection.FORWARD);
-        zwierzatko.move(MoveDirection.FORWARD);
-        zwierzatko.move(MoveDirection.FORWARD);
-        System.out.println(zwierzatko.getAnimalVector());
-        System.out.println(zwierzatko.getAnimalDirection());
+        OptionsParser tmp = new OptionsParser();
+        MoveDirection[] animalDirections = tmp.parse(args); //zamienia mi podane dane na tablicę directions
+
+        for (MoveDirection direction : animalDirections){
+            zwierzatko.move(direction);
+        }
+
+        System.out.println(zwierzatko);
 
 
 
