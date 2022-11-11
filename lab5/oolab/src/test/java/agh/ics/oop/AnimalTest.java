@@ -60,22 +60,22 @@
 //
 //        //tests
 //        Vector2d rightPosition = new Vector2d(2, 2);
-//        assertEquals(rightPosition, zwierze.getAnimalPosition());
+//        assertEquals(rightPosition, zwierze.getPosition());
 //
 //        zwierze.move(przod);
 //        rightPosition = new Vector2d(2, 3);
-//        assertEquals(rightPosition, zwierze.getAnimalPosition());
+//        assertEquals(rightPosition, zwierze.getPosition());
 //
 //
 //        zwierze.move(prawo);
 //        zwierze.move(przod);
 //        rightPosition = new Vector2d(3, 3);
-//        assertEquals(rightPosition, zwierze.getAnimalPosition());
+//        assertEquals(rightPosition, zwierze.getPosition());
 //
 //        zwierze.move(lewo);
 //        zwierze.move(tyl);
 //        rightPosition = new Vector2d(3, 2);
-//        assertEquals(rightPosition, zwierze.getAnimalPosition());
+//        assertEquals(rightPosition, zwierze.getPosition());
 //
 //
 //    }
@@ -102,22 +102,22 @@
 //        Animal zwierze = new Animal(polnoc, new Vector2d(2, 4));
 //        zwierze.move(przod);
 //        Vector2d rightPosition = new Vector2d(2, 4);
-//        assertEquals(rightPosition, zwierze.getAnimalPosition());
+//        assertEquals(rightPosition, zwierze.getPosition());
 //
 //        zwierze = new Animal(wschod, new Vector2d(4, 4));
 //        zwierze.move(przod);
 //        rightPosition = new Vector2d(4, 4);
-//        assertEquals(rightPosition, zwierze.getAnimalPosition());
+//        assertEquals(rightPosition, zwierze.getPosition());
 //
 //        zwierze = new Animal(zachod, new Vector2d(0, 0));
 //        zwierze.move(przod);
 //        rightPosition = new Vector2d(0, 0);
-//        assertEquals(rightPosition, zwierze.getAnimalPosition());
+//        assertEquals(rightPosition, zwierze.getPosition());
 //
 //        zwierze = new Animal(poludnie, new Vector2d(4, 0));
 //        zwierze.move(przod);
 //        rightPosition = new Vector2d(4, 0);
-//        assertEquals(rightPosition, zwierze.getAnimalPosition());
+//        assertEquals(rightPosition, zwierze.getPosition());
 //
 //
 //    }
