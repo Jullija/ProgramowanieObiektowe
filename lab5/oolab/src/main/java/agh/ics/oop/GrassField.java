@@ -43,22 +43,7 @@ public class GrassField extends AbstractWorldMap{
 
     }
 
-    //metoda do znalezienia nowych wymiarów mapy
-    public void boundsUpdate(){
-        //najpierw sprawdzam dostępne zwierzątka, czy one są może na skrajach mapy
-        for (Animal animal : animalList){
-            this.lowerBound = lowerBound.lowerLeft(animal.getPosition()); //porównuję, czy dotychczasowe położenie obejmuje więcej przestrzeni, czy może pozycja zwierzątka obejmuje więcej
-            this.upperBound = upperBound.upperRight(animal.getPosition());
-            }
 
-
-        //analogicznie dla położeń trawy
-        for (Grass grass : grassList){
-            this.lowerBound = lowerBound.lowerLeft(grass.getPosition()); //porównuję, czy dotychczasowe położenie obejmuje więcej przestrzeni, czy może pozycja zwierzątka obejmuje więcej
-            this.upperBound = upperBound.upperRight(grass.getPosition());
-            }
-
-    }
 
 //sprawdzam, czy objekt na tej pozycji jest trawą lub pustym polem -> jeśli jest, to wtedy mogę wejść zwierzątkiem na to pole (true)
     @Override

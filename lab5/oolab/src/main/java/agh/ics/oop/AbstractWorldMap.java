@@ -10,12 +10,11 @@ public abstract class AbstractWorldMap implements IWorldMap {
     protected MapVisualizer mapVisualizer = new MapVisualizer(this);
     protected Vector2d lowerBound;
     protected Vector2d upperBound;
-    abstract public void boundsUpdate();
     abstract public boolean canMoveTo(Vector2d position);
 
     @Override
     public boolean place(Animal animal) {
-        if (this.canMoveTo(animal.getPosition())){ //jeśli mogę się dostać do tego miejsca na mapie to dodaję zwierzątko (sprawdzam i dostępność, i czy się mieści w mapie)
+        if (this.canMoveTo(animal.getPosition())){
             animalList.add(animal);
             return true;
         }
@@ -29,7 +28,7 @@ public abstract class AbstractWorldMap implements IWorldMap {
 
 
     @Override
-    public Object objectAt(Vector2d position) { //zwracam zwierzątko, które już stoi na tym miejscu
+    public Object objectAt(Vector2d position) {
         for (Animal animal : animalList) {
             if (animal.getPosition().equals(position)) {
                 return animal;
@@ -46,9 +45,26 @@ public abstract class AbstractWorldMap implements IWorldMap {
     }
 
     @Override
-    public String toString(){ //rysuję mapę o moich wymiarach
+    public String toString(){
         boundsUpdate();
         return this.mapVisualizer.draw(lowerBound, upperBound);
+    }
+
+    //metoda do znalezienia nowych wymiarów mapy
+    public void boundsUpdate(){
+        //najpierw sprawdzam dostępne zwierzątka, czy one są może na skrajach mapy
+        for (Animal animal : animalList){
+            this.lowerBound = lowerBound.lowerLeft(animal.getPosition()); //porównuję, czy dotychczasowe położenie obejmuje więcej przestrzeni, czy może pozycja zwierzątka obejmuje więcej
+            this.upperBound = upperBound.upperRight(animal.getPosition());
+        }
+
+
+        //analogicznie dla położeń trawy
+        for (Grass grass : grassList){
+            this.lowerBound = lowerBound.lowerLeft(grass.getPosition());
+            this.upperBound = upperBound.upperRight(grass.getPosition());
+        }
+
     }
 
 }

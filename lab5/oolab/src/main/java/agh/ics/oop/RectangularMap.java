@@ -11,14 +11,9 @@ public class RectangularMap extends AbstractWorldMap{
     }
 
 
-
-
     @Override //czy mieści się w mapie i pole nie jest zajęte
     public boolean canMoveTo(Vector2d position) {
         return position.follows(lowerBound) && position.precedes(upperBound) && !isOccupied(position);
     }
 
-
-    @Override
-    public void boundsUpdate() {}
 }
