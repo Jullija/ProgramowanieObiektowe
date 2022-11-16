@@ -11,7 +11,6 @@ public class AnimalTest {
         //given
         Animal zwierze = new Animal();
 
-        //when
         MapDirection polnoc = MapDirection.NORTH;
         MapDirection poludnie = MapDirection.SOUTH;
         MapDirection wschod = MapDirection.EAST;
@@ -20,10 +19,14 @@ public class AnimalTest {
         //test
         assertEquals(polnoc, zwierze.getAnimalOrientation());
 
+        //when
         zwierze.move(MoveDirection.RIGHT);
+        //test
         assertEquals(wschod, zwierze.getAnimalOrientation());
 
+        //when
         zwierze.move(MoveDirection.RIGHT);
+        //test
         assertEquals(poludnie, zwierze.getAnimalOrientation());
 
         zwierze.move(MoveDirection.RIGHT);
