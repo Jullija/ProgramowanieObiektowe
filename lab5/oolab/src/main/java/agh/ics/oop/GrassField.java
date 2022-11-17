@@ -1,7 +1,9 @@
 package agh.ics.oop;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
 
 //    IWorldMap
 //       ^
@@ -12,24 +14,65 @@ import java.util.Random;
 //  RectangularMap     GrassField
 
 public class GrassField extends AbstractWorldMap{
-
-    private final int howManyGrasses;
+    private final List<Grass> grassList;
 
 
     public GrassField(int howManyGrasses){
-        this.howManyGrasses = howManyGrasses;
         this.grassList = new ArrayList<Grass>();
-        this.lowerBound = new Vector2d(0, 0);
-        this.upperBound = new Vector2d((int)Math.sqrt(howManyGrasses*10), (int)Math.sqrt(howManyGrasses*10));
 
         for (int i = 0; i < howManyGrasses; i++){
-            randomGenerator();
+            randomGenerator(howManyGrasses);
         }
-        boundsUpdate();
+
 
     }
 
-    public void randomGenerator(){
+    protected Vector2d getLowerLeftBound(){
+
+        Vector2d lowerBound = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
+
+        for (Animal animal : getAnimalList()){
+            lowerBound = lowerBound.lowerLeft(animal.getPosition());
+        }
+
+        for (Grass grass : grassList){
+            lowerBound = lowerBound.lowerLeft(grass.getPosition());
+        }
+
+        return lowerBound;
+    };
+
+
+
+    abstract protected Vector2d getUpperRightBound(){
+        Vector2d upperBound = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
+
+        for (Animal animal : getAnimalList()){
+            upperBound = upperBound.upperRight(animal.getPosition());
+        }
+
+        for (Grass grass : grassList){
+            upperBound = upperBound.lowerLeft(grass.getPosition());
+        }
+
+        return upperBound;
+    };
+
+
+        @Override
+    public Object objectAt(Vector2d position){
+        Object mapObject = super.objectAt(position); //super to wskaźnik na rodzica -> nie muszę tutaj już pisać o animalsach, bo w AbstractWorldMap mam metodę, które sprawdza zwierzaczki
+        if (mapObject == null){
+            for (Grass grass : grassList){
+                if (grass.getPosition().equals(position)){
+                    return grass;
+                }
+            }
+        }
+        return mapObject;
+    }
+
+    public void randomGenerator(int howManyGrasses){
         Random generator = new Random();
 
         int x = generator.nextInt( (int) Math.sqrt(howManyGrasses*10) + 1); // nextInt(n) - losuje od 0 do n-1
@@ -40,6 +83,9 @@ public class GrassField extends AbstractWorldMap{
         if (!isOccupied(grassPosition)){
             grassList.add(new Grass(grassPosition));
         }
+
+
+
 
     }
 
