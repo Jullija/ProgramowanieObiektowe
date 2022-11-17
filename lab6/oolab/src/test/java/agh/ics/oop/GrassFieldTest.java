@@ -11,6 +11,7 @@ public class GrassFieldTest {
         Animal animal = new Animal(GF, new Vector2d(2, 2));
         GF.place(animal);
 
+
         assertFalse(GF.canMoveTo(new Vector2d(2, 2))); //trawa nie może wejść na pole zwierzaczka
         assertTrue(GF.canMoveTo(new Vector2d(2, 8)));
         assertEquals(animal, GF.objectAt(new Vector2d(2, 2)));

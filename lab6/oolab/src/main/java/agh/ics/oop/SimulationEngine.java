@@ -16,23 +16,27 @@ public class SimulationEngine implements IEngine {
         this.animalList = new ArrayList<Animal>();
         this.animalPositions = animalPositions;
 
-        //można też zrobić to poniżej jako prywatną metodę i wywołać w konstruktorze, żeby było ładniej
-        for (Vector2d position : animalPositions){
-            Animal animal = new Animal(map, position); //tworzę zwierzaczka z tą pozycją
+        addAnimalsOnMap();
 
-            if(map.place(animal)){ //jeśli mogę umieścić zwierzaczka
-                animalList.add(animal); //dodaję zwierzaczka do listy zwierzaczków
+    }
+
+    public void addAnimalsOnMap(){
+        for (Vector2d position : animalPositions){
+            Animal animal = new Animal(map, position);
+
+            if(map.place(animal)){
+                animalList.add(animal);
             }
 
         }
-
     }
 
     @Override
     public void run() {
 
         for (int i = 0; i < moveDirectionList.length; i++){
-            animalList.get(i % animalList.size()).move(moveDirectionList[i]); //wybieram odpowiedniego zwierzaczka i go ruszam
+            Animal animal = animalList.get(i % animalList.size());
+            animal.move(moveDirectionList[i]);
             System.out.println(map);
         }
 
