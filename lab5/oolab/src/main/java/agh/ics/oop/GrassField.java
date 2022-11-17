@@ -44,7 +44,7 @@ public class GrassField extends AbstractWorldMap{
 
 
 
-    abstract protected Vector2d getUpperRightBound(){
+    protected Vector2d getUpperRightBound(){
         Vector2d upperBound = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
 
         for (Animal animal : getAnimalList()){

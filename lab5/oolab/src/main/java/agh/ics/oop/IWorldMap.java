@@ -36,7 +36,7 @@ public interface IWorldMap {
      * @return True if the position is occupied.
      */
     default boolean isOccupied(Vector2d position){
-        return (boolean) objectAt(position);
+        return objectAt(position) != null;
     }
 
     /**
