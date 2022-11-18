@@ -23,7 +23,7 @@ public class Animal implements IMapElement{
         this.position = initialPosition;
         this.orientation = MapDirection.NORTH;
         this.observers = new ArrayList<IPositionChangeObserver>();
-        this.observers.add((IPositionChangeObserver) map);
+       addObserver((IPositionChangeObserver) map);
     }
 
     @Override
