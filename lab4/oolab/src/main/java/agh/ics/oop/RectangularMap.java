@@ -5,8 +5,8 @@ import java.util.List;
 
 public class RectangularMap implements IWorldMap{
 
-    private final int width;
-    private final int height;
+//    private final int width;
+//    private final int height;
     private final List<Animal> animalList; //lista zwierzątek, które już są na mapie
     private final MapVisualizer mapVisualizer;
     private final Vector2d lowerBound;
@@ -16,8 +16,8 @@ public class RectangularMap implements IWorldMap{
 
     //konstruktor
     public RectangularMap(int width, int height){
-        this.width = width;
-        this.height = height;
+//        this.width = width;
+//        this.height = height;
         this.mapVisualizer = new MapVisualizer(this);
         this.animalList = new ArrayList<Animal>();
         this.lowerBound = new Vector2d(0,0);
@@ -43,7 +43,7 @@ public class RectangularMap implements IWorldMap{
 
     @Override
     public boolean isOccupied(Vector2d position) {
-        return this.objectAt(position) != null;
+        return objectAt(position) != null;
     }
 
     @Override
@@ -54,6 +54,13 @@ public class RectangularMap implements IWorldMap{
             }
         }
         return null;
+
+
+//        return animalList.stream()
+//                .filter(animal -> animal.isAt(position))
+//                .findFirst() //zwróci nam Optionala -> pudełko na coś, albo 0. coś, co ma w sobie coś albo nie ma nic
+//                .orElse(null); //co zrobić, jeśli findFirst zwrói nam pustego Optionala
+
     }
 
     @Override

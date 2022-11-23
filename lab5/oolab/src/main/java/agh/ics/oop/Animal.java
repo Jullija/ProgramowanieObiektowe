@@ -1,9 +1,8 @@
 package agh.ics.oop;
 
 import java.util.Objects;
-import java.util.Vector;
 
-public class Animal {
+public class Animal implements IMapElement{
 
 
     private MapDirection orientation;
@@ -36,7 +35,7 @@ public class Animal {
         return orientation;
     }
 
-    public Vector2d getAnimalPosition() {
+    public Vector2d getPosition() {
         return position;
     }
 
