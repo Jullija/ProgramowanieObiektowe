@@ -23,7 +23,7 @@ public class Animal implements IMapElement{
         this.position = initialPosition;
         this.orientation = MapDirection.NORTH;
         this.observers = new ArrayList<IPositionChangeObserver>();
-       addObserver((IPositionChangeObserver) map);
+       // addObserver(map); -> tutaj albo w AbstractWorldMap
     }
 
     @Override
@@ -83,7 +83,7 @@ public class Animal implements IMapElement{
         observers.remove(observer);
     }
 
-    void positionChanged(Vector2d oldPosition, Vector2d newPosition){
+    void positionChanged(Vector2d oldPosition, Vector2d newPosition){ //publisher to klasa animal, subscriber to mapa
         for (IPositionChangeObserver observer : observers){
             observer.positionChanged(oldPosition, newPosition);
 

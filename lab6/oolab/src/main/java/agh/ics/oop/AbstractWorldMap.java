@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 //tutaj umieszczamy to, co jest we wszystkich rodzajach mapy (np trawa nie jest we wszystkich mapach)
-public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
+public abstract class AbstractWorldMap implements IWorldMap{ //już nie musimy dopisywać IPositionChangeObserver, bo dpisaliśmy, że IWorldMap extends IPositionChangeObserver
 
     private final Map<Vector2d, Animal> animals = new HashMap<>();
     private final MapVisualizer mapVisualizer = new MapVisualizer(this);
@@ -15,6 +15,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
     public boolean place(Animal animal) {
         if (this.canMoveTo(animal.getPosition())){
             animals.put(animal.getPosition(), animal);
+            animal.addObserver(this);
             return true;
         }
         return false;

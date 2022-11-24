@@ -55,7 +55,7 @@ public class GrassField extends AbstractWorldMap{
     protected Vector2d getUpperRightBound(){
         Vector2d upperBound = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
 
-        for (Vector2d position : getAnimalHashMap().keySet()){
+        for (Vector2d position : getAnimalHashMap().keySet()){ //jak można, to lepiej iść po kluczach, bo zwracany jest Set, a przy values() zwraca Colection
             upperBound = upperBound.upperRight(position);
         }
 

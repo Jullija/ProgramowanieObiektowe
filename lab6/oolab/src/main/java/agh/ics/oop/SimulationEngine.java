@@ -26,10 +26,18 @@ public class SimulationEngine implements IEngine {
 
             if(map.place(animal)){
                 animalList.add(animal);
+                animal.addObserver(new IPositionChangeObserver() { //klasa anonimowa
+                    @Override
+                    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+                        System.out.println("Zwierzątko ruszyło się na pozycję " + newPosition);
+
+                    }
+                });
             }
 
         }
     }
+
 
     @Override
     public void run() {
