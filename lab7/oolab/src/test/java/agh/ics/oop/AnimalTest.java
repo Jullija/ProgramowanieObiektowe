@@ -1,126 +1,50 @@
-//package agh.ics.oop;
-//
-//import org.junit.jupiter.api.Test;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//public class AnimalTest {
-//
-//    @Test
-//    public void rightOrientationTest(){
-//        //given
-//        Animal zwierze = new Animal();
-//
-//        MapDirection polnoc = MapDirection.NORTH;
-//        MapDirection poludnie = MapDirection.SOUTH;
-//        MapDirection wschod = MapDirection.EAST;
-//        MapDirection zachod = MapDirection.WEST;
-//
-//        //test
-//        assertEquals(polnoc, zwierze.getAnimalOrientation());
-//
-//        //when
-//        zwierze.move(MoveDirection.RIGHT);
-//        //test
-//        assertEquals(wschod, zwierze.getAnimalOrientation());
-//
-//        //when
-//        zwierze.move(MoveDirection.RIGHT);
-//        //test
-//        assertEquals(poludnie, zwierze.getAnimalOrientation());
-//
-//        zwierze.move(MoveDirection.RIGHT);
-//        assertEquals(zachod, zwierze.getAnimalOrientation());
-//
-//
-//        zwierze.move(MoveDirection.LEFT);
-//        assertEquals(poludnie, zwierze.getAnimalOrientation());
-//
-//        zwierze.move(MoveDirection.LEFT);
-//        assertEquals(wschod, zwierze.getAnimalOrientation());
-//
-//        zwierze.move(MoveDirection.LEFT);
-//        assertEquals(polnoc, zwierze.getAnimalOrientation());
-//
-//    }
-//
-//
-//
-//    @Test
-//    public void rightPositionsTest(){
-//        //given
-//        Animal zwierze = new Animal();
-//
-//        //when
-//        MoveDirection przod = MoveDirection.FORWARD;
-//        MoveDirection tyl = MoveDirection.BACKWARD;
-//        MoveDirection lewo = MoveDirection.LEFT;
-//        MoveDirection prawo = MoveDirection.RIGHT;
-//
-//
-//        //tests
-//        Vector2d rightPosition = new Vector2d(2, 2);
-//        assertEquals(rightPosition, zwierze.getPosition());
-//
-//        zwierze.move(przod);
-//        rightPosition = new Vector2d(2, 3);
-//        assertEquals(rightPosition, zwierze.getPosition());
-//
-//
-//        zwierze.move(prawo);
-//        zwierze.move(przod);
-//        rightPosition = new Vector2d(3, 3);
-//        assertEquals(rightPosition, zwierze.getPosition());
-//
-//        zwierze.move(lewo);
-//        zwierze.move(tyl);
-//        rightPosition = new Vector2d(3, 2);
-//        assertEquals(rightPosition, zwierze.getPosition());
-//
-//
-//    }
-//
-//
-//
-//    @Test
-//    public void isOnMapTest(){
-//        //given
-//
-//
-//        //when
-//        MapDirection polnoc = MapDirection.NORTH;
-//        MapDirection poludnie = MapDirection.SOUTH;
-//        MapDirection wschod = MapDirection.EAST;
-//        MapDirection zachod = MapDirection.WEST;
-//        MoveDirection przod = MoveDirection.FORWARD;
-//        MoveDirection tyl = MoveDirection.BACKWARD;
-//        MoveDirection lewo = MoveDirection.LEFT;
-//        MoveDirection prawo = MoveDirection.RIGHT;
-//
-//
-//        //tests
-//        Animal zwierze = new Animal(polnoc, new Vector2d(2, 4));
-//        zwierze.move(przod);
-//        Vector2d rightPosition = new Vector2d(2, 4);
-//        assertEquals(rightPosition, zwierze.getPosition());
-//
-//        zwierze = new Animal(wschod, new Vector2d(4, 4));
-//        zwierze.move(przod);
-//        rightPosition = new Vector2d(4, 4);
-//        assertEquals(rightPosition, zwierze.getPosition());
-//
-//        zwierze = new Animal(zachod, new Vector2d(0, 0));
-//        zwierze.move(przod);
-//        rightPosition = new Vector2d(0, 0);
-//        assertEquals(rightPosition, zwierze.getPosition());
-//
-//        zwierze = new Animal(poludnie, new Vector2d(4, 0));
-//        zwierze.move(przod);
-//        rightPosition = new Vector2d(4, 0);
-//        assertEquals(rightPosition, zwierze.getPosition());
-//
-//
-//    }
-//
-//
-//}
+package agh.ics.oop;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class AnimalTest {
+
+
+    @Test
+    public void allGood(){
+        RectangularMap map = new RectangularMap(10, 10);
+        Animal animal = new Animal(map, new Vector2d(2, 2));
+        String[] moves = {"f", "f", "r", "b"};
+        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.RIGHT);
+        animal.move(MoveDirection.BACKWARD);
+
+        assertEquals(new Vector2d(1, 4), animal.getPosition());
+
+
+    }
+
+    @Test
+    public void twoAnimalsSamePlaceTest(){
+        RectangularMap map = new RectangularMap(10, 10);
+        Animal animal1 = new Animal(map, new Vector2d(2, 2));
+        Animal animal2 = new Animal(map, new Vector2d(2, 2));
+        map.place(animal1);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            map.place(animal2);
+        });
+
+        assertEquals(new Vector2d(2, 2) + "is not legal move specification", exception.getMessage());
+    }
+
+    @Test
+    public void outsideMapTest(){
+        RectangularMap map = new RectangularMap(10, 10);
+        Animal animal1 = new Animal(map, new Vector2d(20, 2));
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            map.place(animal1);
+        });
+
+        assertEquals(new Vector2d(20, 2) + "is not legal move specification", exception.getMessage());
+    }
+}

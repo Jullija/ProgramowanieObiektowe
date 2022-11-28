@@ -20,11 +20,11 @@ public class RectangularMap extends AbstractWorldMap{
     }
 
     @Override
-    protected Vector2d getLowerLeftBound(){
+    public Vector2d getLowerLeftBound(){
         return lowerBound;
     }
     @Override
-    protected Vector2d getUpperRightBound(){
+    public Vector2d getUpperRightBound(){
         return upperBound;
     }
 
