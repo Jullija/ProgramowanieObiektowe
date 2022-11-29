@@ -27,9 +27,7 @@ public class App extends Application {
             map = new GrassField(10);
             Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
             IEngine engine = new SimulationEngine(directions, map, positions);
-            System.out.println(map);
             engine.run();
-            System.out.println(map);
         }
         catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
@@ -82,7 +80,7 @@ public class App extends Application {
                 if (this.map.isOccupied(position)){
                     Object objectOnMap = this.map.objectAt(position);
                     Label label = new Label(objectOnMap.toString());
-                    gridPane.add(label, position.x - xMin + 1, xMax - position.y + 1);
+                    gridPane.add(label, position.x - xMin + 1, yMax - position.y + 1);
                     GridPane.setHalignment(label, HPos.CENTER);
                 }
             }
