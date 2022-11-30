@@ -3,15 +3,14 @@ package agh.ics.oop;
 import java.util.ArrayList;
 import java.util.List;
 
+//tutaj umieszczamy to, co jest we wszystkich rodzajach mapy (np trawa nie jest we wszystkich mapach)
 public abstract class AbstractWorldMap implements IWorldMap {
 
-    protected List<Animal> animalList = new ArrayList<Animal>();
-    protected List<Grass> grassList = new ArrayList<Grass>();
-    protected MapVisualizer mapVisualizer = new MapVisualizer(this);
-    protected Vector2d lowerBound;
-    protected Vector2d upperBound;
-    abstract public boolean canMoveTo(Vector2d position);
+    private final List<Animal> animalList = new ArrayList<Animal>();
+    private final MapVisualizer mapVisualizer = new MapVisualizer(this);
 
+    //nie dodawamy atrybutow, bo za każdym razem będzie nam je zmieniać
+    //nie trzeba mówić o canMoveTo, bo to już jest klasa abstrakcyjna domyślnie, bo jest w interfejsie
     @Override
     public boolean place(Animal animal) {
         if (this.canMoveTo(animal.getPosition())){
@@ -21,10 +20,11 @@ public abstract class AbstractWorldMap implements IWorldMap {
         return false;
     }
 
-    @Override
-    public boolean isOccupied(Vector2d position) {
-        return objectAt(position) != null;
+
+    public List<Animal> getAnimalList(){
+        return animalList;
     }
+
 
 
     @Override
@@ -34,37 +34,18 @@ public abstract class AbstractWorldMap implements IWorldMap {
                 return animal;
             }
         }
-
-        for (Grass grass : grassList) {
-            if (grass.getPosition().equals(position)) {
-                return grass;
-            }
-        }
-
         return null;
     }
 
     @Override
     public String toString(){
-        boundsUpdate();
-        return this.mapVisualizer.draw(lowerBound, upperBound);
+        return this.mapVisualizer.draw(getLowerLeftBound(), getUpperRightBound());
     }
 
-    //metoda do znalezienia nowych wymiarów mapy
-    public void boundsUpdate(){
-        //najpierw sprawdzam dostępne zwierzątka, czy one są może na skrajach mapy
-        for (Animal animal : animalList){
-            this.lowerBound = lowerBound.lowerLeft(animal.getPosition()); //porównuję, czy dotychczasowe położenie obejmuje więcej przestrzeni, czy może pozycja zwierzątka obejmuje więcej
-            this.upperBound = upperBound.upperRight(animal.getPosition());
-        }
+    abstract protected Vector2d getLowerLeftBound();
 
 
-        //analogicznie dla położeń trawy
-        for (Grass grass : grassList){
-            this.lowerBound = lowerBound.lowerLeft(grass.getPosition());
-            this.upperBound = upperBound.upperRight(grass.getPosition());
-        }
 
-    }
+    abstract protected Vector2d getUpperRightBound();
 
 }
