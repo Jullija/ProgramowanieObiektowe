@@ -5,8 +5,8 @@ public class MapBoundary implements IPositionChangeObserver{
 
     //treeSet - elementy nie będą się powtarzać + będą się sortować
 
-    TreeSet<Vector2d> xElements = new TreeSet<>(Comparator.<Vector2d>comparingInt(xVec -> xVec.x).thenComparingInt(xVec -> xVec.y));
-    TreeSet<Vector2d> yElements = new TreeSet<>(Comparator.<Vector2d>comparingInt(yVec -> yVec.y).thenComparingInt(yVec -> yVec.x));
+    private TreeSet<Vector2d> xElements = new TreeSet<>(Comparator.<Vector2d>comparingInt(xVec -> xVec.x).thenComparingInt(xVec -> xVec.y));
+    private TreeSet<Vector2d> yElements = new TreeSet<>(Comparator.<Vector2d>comparingInt(yVec -> yVec.y).thenComparingInt(yVec -> yVec.x));
 
     @Override
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
