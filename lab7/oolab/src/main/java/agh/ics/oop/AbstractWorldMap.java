@@ -20,6 +20,7 @@ public abstract class AbstractWorldMap implements IWorldMap{
         animals.put(animal.getPosition(), animal);
         animal.addObserver(this);
         mapBoundary.addPosition(animal.getPosition());
+        animal.addObserver(mapBoundary);
         return true;
     }
 
