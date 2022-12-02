@@ -21,26 +21,27 @@ public class GuiElementBox {
     private VBox verticalBox;
 
     public GuiElementBox(IMapElement mapElement) throws FileNotFoundException {
+
         try{
-            image = new Image(new FileInputStream(mapElement.getImagePath()));
+            Image image = new Image(new FileInputStream(mapElement.getImagePath()));
             imageView = new ImageView(image);
             imageView.setFitHeight(IMAGE_SIZE);
             imageView.setFitWidth(IMAGE_SIZE);
 
         } catch(FileNotFoundException e){
-            throw new FileNotFoundException("File not found");
+            throw new FileNotFoundException(e.getMessage());
         }
 
 
         if (mapElement instanceof Animal){
-            Label label = new Label(mapElement.getPosition().toString());
+           label = new Label(mapElement.getPosition().toString());
         }
         else{
-            Label label = new Label("FastTravel");
+            label = new Label("FastTravel");
         }
 
-        verticalBox = new VBox();
-        verticalBox.getChildren().addAll(imageView, label);
+        verticalBox = new VBox(imageView, label);
+        verticalBox.getChildren().addAll();
         verticalBox.setAlignment(Pos.CENTER);
 
 
