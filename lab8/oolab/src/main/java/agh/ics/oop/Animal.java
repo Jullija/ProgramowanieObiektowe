@@ -90,4 +90,15 @@ public class Animal implements IMapElement{
     }
 
 
+    @Override
+    public String getImagePath(){
+        return switch (this.orientation){
+            case NORTH -> "src/main/resources/up.png";
+            case SOUTH -> "src/main/resources/down.png";
+            case EAST -> "src/main/resources/right.png";
+            case WEST -> "src/main/resources/left.png";
+        };
+    }
+
+
 }
