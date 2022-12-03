@@ -1,14 +1,18 @@
 package agh.ics.oop;
 
+import agh.ics.oop.gui.App;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimulationEngine implements IEngine {
+public class SimulationEngine implements IEngine, Runnable {
 
     private final IWorldMap map;
-    private final MoveDirection[] moveDirectionList;
+    private MoveDirection[] moveDirectionList;
     private final List<Animal> animalList;
     private final Vector2d[] animalPositions;
+    private int moveDelay;
+    private App app;
 
     public SimulationEngine(MoveDirection[] moveDirectionList, IWorldMap map, Vector2d[] animalPositions){
         this.map = map;
@@ -17,7 +21,17 @@ public class SimulationEngine implements IEngine {
         this.animalPositions = animalPositions;
 
         addAnimalsOnMap();
+    }
 
+    public SimulationEngine(MoveDirection[] moveDirectionList, IWorldMap map, Vector2d[] animalPositions, int moveDelay, App app){
+        this(moveDirectionList, map, animalPositions);
+        this.moveDelay = moveDelay;
+        this.app = app;
+    }
+
+
+    public void setMoveDirections(MoveDirection[] moveDirectionList){
+        this.moveDirectionList = moveDirectionList;
     }
 
     public void addAnimalsOnMap(){
@@ -42,11 +56,22 @@ public class SimulationEngine implements IEngine {
     @Override
     public void run() {
 
-        for (int i = 0; i < moveDirectionList.length; i++){
-            Animal animal = animalList.get(i % animalList.size());
-            animal.move(moveDirectionList[i]);
-            System.out.println(map);
+        try{
+            Thread.sleep(moveDelay);
+            for (int i = 0; i < moveDirectionList.length; i++){
+                Animal animal = animalList.get(i % animalList.size());
+                animal.move(moveDirectionList[i]);
+
+                System.out.println(map);
+                app.refreshMap(); //drukowanie ponowne mapy
+                Thread.sleep(moveDelay);
+            }
         }
+        catch(InterruptedException e){
+            e.getMessage();
+        }
+
+
 
     }
 }

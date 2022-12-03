@@ -23,7 +23,7 @@ public class GuiElementBox {
     public GuiElementBox(IMapElement mapElement) throws FileNotFoundException {
 
         try{
-            Image image = new Image(new FileInputStream(mapElement.getImagePath()));
+            image = new Image(new FileInputStream(mapElement.getImagePath()));
             imageView = new ImageView(image);
             imageView.setFitHeight(IMAGE_SIZE);
             imageView.setFitWidth(IMAGE_SIZE);
@@ -40,8 +40,8 @@ public class GuiElementBox {
             label = new Label("FastTravel");
         }
 
-        verticalBox = new VBox(imageView, label);
-        verticalBox.getChildren().addAll();
+        verticalBox = new VBox();
+        verticalBox.getChildren().addAll(imageView, label);
         verticalBox.setAlignment(Pos.CENTER);
 
 
