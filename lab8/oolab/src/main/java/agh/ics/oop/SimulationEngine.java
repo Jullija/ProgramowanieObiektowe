@@ -27,6 +27,7 @@ public class SimulationEngine implements IEngine, Runnable {
         this(moveDirectionList, map, animalPositions);
         this.moveDelay = moveDelay;
         this.app = app;
+//        addObserverOnMap(app);
     }
 
 
@@ -49,6 +50,16 @@ public class SimulationEngine implements IEngine, Runnable {
                 });
             }
 
+        }
+    }
+
+    public void addObserverOnMap(App app){
+        for (Vector2d position : animalPositions){
+            Animal animal = new Animal(map, position);
+
+            if(map.place(animal)){
+                animal.addObserver(app);
+            }
         }
     }
 

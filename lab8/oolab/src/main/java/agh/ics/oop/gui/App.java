@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 
 
-public class App extends Application {
+public class App extends Application implements IPositionChangeObserver{
 
     private AbstractWorldMap map;
     private GridPane gridPane = new GridPane();
@@ -155,4 +155,10 @@ public class App extends Application {
         primaryStage.show();
     }
 
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        Platform.runLater(() ->{
+            refreshMap();
+        });
+    }
 }
