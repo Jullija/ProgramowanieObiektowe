@@ -30,40 +30,21 @@ public class GrassField extends AbstractWorldMap{
 
             if (!isOccupied(grassPosition)){
                 grasses.put(grassPosition, newGrass);
+                mapBoundary.addPosition(grassPosition);
                 actualGrass += 1;
             }
 
         }
     }
-    protected Vector2d getLowerLeftBound(){
-
-        Vector2d lowerBound = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
-
-        for (Vector2d position : getAnimalHashMap().keySet()){
-            lowerBound = lowerBound.lowerLeft(position);
-        }
-
-        for (Vector2d position : grasses.keySet()){
-            lowerBound = lowerBound.lowerLeft(position);
-        }
-
-        return lowerBound;
+    @Override
+    public Vector2d getLowerLeftBound(){
+        return mapBoundary.getLowerLeft();
     };
 
 
-
-    protected Vector2d getUpperRightBound(){
-        Vector2d upperBound = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
-
-        for (Vector2d position : getAnimalHashMap().keySet()){ //jak można, to lepiej iść po kluczach, bo zwracany jest Set, a przy values() zwraca Colection
-            upperBound = upperBound.upperRight(position);
-        }
-
-        for (Vector2d position : grasses.keySet()){
-            upperBound = upperBound.upperRight(position);
-        }
-
-        return upperBound;
+    @Override
+    public Vector2d getUpperRightBound(){
+        return mapBoundary.getUpperRight();
     };
 
 
@@ -77,8 +58,6 @@ public class GrassField extends AbstractWorldMap{
     }
 
 
-
-//sprawdzam, czy objekt na tej pozycji jest trawą lub pustym polem -> jeśli jest, to wtedy mogę wejść zwierzątkiem na to pole (true)
     @Override
     public boolean canMoveTo(Vector2d position) {
         Object obj = this.objectAt(position);
